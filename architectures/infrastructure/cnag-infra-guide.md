@@ -435,6 +435,8 @@ So each self-contained application should has its own network. Additonally, ther
 
 Incidentally, an on-premise connection would be just another branch in this star.
 
+![](./hubandspoke.png)
+
 ## Documentation and diagrams
 
 Some short hints for your documentation workoad.
