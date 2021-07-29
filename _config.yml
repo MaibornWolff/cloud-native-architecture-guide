@@ -3,6 +3,3 @@ title: Cloud Native Architecture Guide
 description: powered by maibornwolff
 
 markdown: kramdown
-
-exclude:
-  - "readme.md"
