@@ -4,29 +4,29 @@
 {:toc}    
 ## How we run what we built
 
-The cloud offers an almost unlimited pool of **compute power**, **storage** and **network components** as a service
+The cloud offers an almost unlimited pool of **compute power**, **storage** and **network components** as a service.
 
 The main characteristics could be described as follows:
 
-- **On-demand self-service**: Cloud resources can be provisioned without any human interaction from the service provider.
+- **On-demand self-service**: Cloud resources can be provisioned without the need for human interaction from the service provider.
 
-- **Broad network access**: Cloud resources are accessible over the network supporting heterogeneous client platforms
+- **Broad network access**: Cloud resources are accessible over the network supporting heterogeneous client platforms.
 
-- **Multi-tenancy and resource pooling**: Resource pooling means that multiple customers are serviced from the same physical resources
+- **Multi-tenancy and resource pooling**: Resource pooling means that multiple customers are serviced by the same physical resources.
 
-- **Rapid elasticity and scalability**: Resources are provisioned and released on-demand and/or automated based on triggers or parameters. This make sure that your application have exactly the capacity it needs at any point of time.
+- **Rapid elasticity and scalability**: Resources are provisioned and released on-demand, which can be automated based on thresholds. This makes sure that your application has exactly the capacity it needs at any point in time.
 
-- **Measured service**:  Resource usage are monitored, measured, and billed transparently based on utilization.
+- **Measured service**:  Resource usage is monitored, measured, and billed transparently based on utilization.
 
 ### So what is infrastructure architecture?
 
-Its a blueprint on which cloud services the overall application is mapped and which contrasting infrastructure services are used to connect individual application parts.
+It is a blueprint on which cloud services the overall application is mapped and which contrasting infrastructure services are used to connect individual application parts.
 
-The Idea of Cloud Native Applications is to make the best use of all the cloud characteristics as possible!
+The idea of Cloud Native (short: CN) Applications is to make the best use of all the cloud services and characteristics!
 
-Because of this, the CN applications are often more distributed than applications on-premise infrastructure, so its very important to include infrastructure considerations in all your decisions.
+Because of this, the CN applications are often more distributed than applications on premise infrastructure, so it is very important to include infrastructure considerations in all your decisions.
 
-The Part of the guide should help you to choose the right cloud services based on your application needs.
+The part of the guide should help you to choose the right cloud services based on your application needs.
 
 ![](./cnag_overview.png)
 
@@ -40,77 +40,77 @@ The Part of the guide should help you to choose the right cloud services based o
 
 ## IaaS vs PaaS vs SaaS (what it is)
 
-**Infrastructure as a Service (IaaS)**: This model provides basic IT resources such as computing power, storage or network capacities. The user has control over the operating systems and applications; he usually has to assemble the infrastructure himself from the required computing instances and memories.
+**Infrastructure as a Service (IaaS)**: This model provides basic IT resources such as computing power, storage, or network capacities. The user has control over the operating systems and applications; he usually must assemble the infrastructure himself from the required computing instances and memories.
 
 IaaS is usually not the right choice for cloud native solutions and should only be used for legacy parts of the applications.
 
-**Platform as a Service (PaaS):** PaaS is a type of service that provides a programming model and developer tools to build and run cloud-based applications. A PaaS provider should automatically provide all necessary resources such as computing power, storage, network, middleware for message queuing or load balancing and databases when the application is deployed and scale them depending on the requirements. Integrated monitoring functions are also expected, with which the runtime behavior of the applications can be monitored.
+**Platform as a Service (PaaS):** PaaS is a type of service that provides a programming model and developer tools to build and run cloud-based applications. A PaaS provider should automatically provide all necessary resources such as computing power, storage, network, middleware such as message queuing or load balancing and databases when the application is deployed and scale them depending on the requirements. Integrated monitoring functions are also expected, with which the runtime behavior of the applications can be observed.
 
-PaaS services should be the first choice for cloud native applications
+PaaS services should be the first choice for cloud native applications.
 
-**Software as a Service (SaaS):** SaaS represents the top layer of cloud models. The provider provides its own applications for the users. This is where SaaS differs from its predecessor ASP (Application Service Provider), in which the service provider offered applications from other manufacturers for rent. Most of these were not multi-tenant, while SaaS support multitenancy by default.
+**Software as a Service (SaaS):** SaaS represents the top layer in the cloud model, in which the cloud provider provides their own applications to the users. This is where SaaS differs from its predecessor ASP (Application Service Provider), in which the service provider offered applications from other manufacturers for rent. Most of these were not capable of multi-tenancy, whereas SaaS support for multiple tenants is the norm.
 
 The customer of a SaaS provider does not have to worry about the technical infrastructure or the installation and updates of the application. This is done centrally by the provider so that the current version of the software is always available to users.
 
-SaaS should be used for applications which are not part of your core domain. Usually it make no sense to rebuild thinks which exists as saas with no need of customization.
+SaaS should be used for applications which are not part of your core domain. Usually, it is better to use existing SaaS if they fit your needs and only build your own Services if your unsatisfied with them. It is usually easier to switch from using an SaaS to your own solution than the other way around.
 
-## How to choose the correct cloud ressources for your application?
+## How to choose the correct cloud resources for your application?
 
 ### considering constraints and organizational boundaries
 
-Before your start with choosing cloud services, should considering the following topics
+Before choosing cloud services to you use in your specific project, you should consider the following the aspects detailed in the following chapters:
 
 #### Greenfield vs. Brownfield
 
-Greenfield or Brownfield should definitely have an impact on the choice of cloud services. If you already have a aged system, the first thing you should ask yourself is how to proceed with it.
+Greenfield or Brownfield will very likely have an impact on the choice of cloud services. If you already have an aged system on which to build, the first thing you should ask yourself is how to proceed with it.
 
-It usually does not make sense to start with the services that are best suited for a task, but the resulting diversity together with the legacy services increases complexity, makes configurability more opaque and has a negative impact on your development at all.
+It usually does not make sense to start with the services that are best suited for a task, but the resulting diversity together with the legacy services increases complexity, makes configurability more opaque and has a negative impact on development.
 
 Instead, it could make sense to start on a new, closed modules or subsystems with a different set of cloud services. There should be a clearly visible contract between the legacy and new services in the overall system. Measured against the remaining term and relevance of the legacy services, it should be assessed whether it is worth migrating them to other cloud services or not.
 
 #### Costs
 
-A big advantage of using cloud providers is, that it is possible to base the costs on the actual needs instead of an upfront invest like withhin an on-premise data center.
+A big advantage of using cloud providers is that it is possible to base the costs on the actual needs and not an upfront investment like with an on-premises data center.
 
-In order to make effective use of it, the costs should always be in focus when developing cloud native applications.
+To make effective use of it, the costs should always be the focus when developing cloud native applications.
 
-For every service that you plan to use, you should deal with the respective cost model. Services are often available in different tiers depending on the required feature set or usage within a certain period of time. Free tiers are also not uncommon if the requirements are low.
+For every service that you plan to use, you should deal with the respective cost model. Services are often available in different tiers depending on the required feature set or volume usage within a certain period. Free tiers are quite common and a good fit if your requirements are low.
 
-The following things should be taken into account when considering costs:
+The following things should be considered regarding costs:
 
-* Which tier fits the requirements of my application
+* Which tier fits the requirements of my application?
 
-* Does the service fit into the project budget
+* Does the service fit into the project budget?
 
-* A characteristic of cloud native applications is not always to watch for the service with the appropriate cost model. Instead you should align your application with the cost models
+* A characteristic of cloud native applications is not always to watch for the service with the appropriate cost model. Instead, you should align your application with the cost models.
 
-* In non-productive environments, cheaper tiers can be selected or the overall sytem can be shutd owncompletely while they are not in use
+* In non-productive environments, cheaper tiers can be selected or completely shut down in times when they are not used.
 
-* Some services are cheaper if they are reserved for a longer period
+* Some services are cheaper if they are reserved for a longer period.
 
 * The selected target region can also influence costs
 
-* Each cloud provider provides cost calculators to calculate how much a service costs depending on the entered usage.
+* Most cloud providers provide cost calculators to calculate how much a service costs depending on the entered usage.
 
-* You should make regular use of the cloud cost-monitoring solutions. Cost models are adjusted occasionally. Changes in the workload can also have an unforeseen effect on costs
+* You should make regular use of the cloud cost-monitoring solutions. Cost models are adjusted occasionally. Changes in the workload can also have an unforeseen effect on costs.
 
 #### Longevity
 
-Another important question, "how long should your application exist, or how long are people available who can actively design the system".
+Another important question, “how long should your application exist, or how long are people available who can actively design the system?”.
 
-The higher the abstraction layer of a service is, the less you have to invest in development or operation and you get results very quickly. Cloud native applications use this advantage by combining a large number of different services to have low initial costs in the respective solution space.
+The higher the abstraction layer of a service, the less investment you need to invest for development or operation and thus you will likely see results sooner. Cloud native applications use this advantage and often combine many different services to have low initial costs in the respective solution space.
 
-What you need to know, cloud services change over time. Especially with services on a high abstraction level , it happens sometimes that these services are completely redesigned with changes to the cost model. So maybe, it make no sense to use it anymore for the application or even harder the service could be completely removed by the provider.
+What you need to know, cloud services change over time. Especially with services on a high level of abstraction, it happens sometimes that these are completely redesigned, the cost model changes, therefore it may no longer fit a specific application or even be completely removed.
 
-That is why it is important to be aware of this, right from the start and you should design your cloud infrastructure in such a way that services can be exchanged with a reasonable amount of effort and, above all, that people and budget are available to make these adjustments. If this cannot be guaranteed, it can make sense to choose services on a lower abstraction level, where the initial effort is higher but the runtime is more constant.
+That is why it is important to be aware of this right from the start and to design the cloud infrastructure architecture in such a way that services can be exchanged with a reasonable amount of effort and, above all, that people and budget are available to make these adjustments. If this cannot be guaranteed, it can make sense to choose services on a lower abstraction level, where the initial effort is higher, but the runtime is more constant.
 
 #### Service Level Agreements
 
-Every cloud provider guarantees certain "service level agreements" for different services. These are regulations for general availability, speed, reaction time in case of errors, the recovery time after an error or how much time must elapse between downtimes. If these agreements cannot be kept, which cannot be prevented, there is a certain contractual compensation depending on the provider.
+Every cloud provider guarantees certain “service level agreements” for different services. These are regulations for general availability, speed, reaction time of the provider in case of errors, the recovery time after an error or how much time must elapse between downtimes. If these agreements cannot be kept, which cannot be prevented, there is a certain contractual compensation depending on the provider.
 
-In common, everybody speaking about the percentage availability over time in context with SLA's. This often corresponds to an value between 99.9% - 99.999% (called 5 nines). If a service only has an availability of 99.9% then it can be down about 10 minutes a week, from a contractual point of view. A 5-nine service is only 6 seconds per week not available.
+In common, everybody speaking about the percentage availability over time in context with SLA’s. This often corresponds to a value between 99.9% - 99.999% (called 5 nines). If a service only has an availability of 99.9% then it can be down about 10 minutes a week, from a contractual point of view. A 5-nine service only 6 seconds per week not available.
 
-However, it is not enough to just evaluate individual services. If you want to achieve your total availability, you multiply all values from each service together, e.g. 99.9% x 99.9%. This leads to an value of 99.8%. If you need a higher availability for your customers you should:
+However, it is not enough to just evaluate individual services. If you want to achieve your total availability, you multiply all values from each service together, e.g., 99.9% x 99.9%. This leads to a value of 99.8%. If you need a higher availability for your customers, you should:
 
 * switch to other services
 
@@ -120,23 +120,23 @@ However, it is not enough to just evaluate individual services. If you want to a
 
 * Increase availability by absorbing possible service failures through compensation mechanisms. For example, cache data if it cannot be delivered and try again later. This often increases the overall complexity and you need more components to fulfill it, which in turn, have a negative effect on the availability. Because the new components can potentially fail too.
 
-Once you have calculated the availability on the cloud side, it is often not enough to pass this directly to your customers. You should also allow your team an "error budget" for your application. You add a certain amount of time that is either consumed by unplanned application failures or by planned maintenance windows.
+Once you have calculated the availability on the cloud side, it is often not enough to pass this directly to your customers. You should also allow an “error budget” for your own application. You add a certain amount of time that is either consumed by unplanned failures of your own application or by planned maintenance windows.
 
-It is important to plan SLA monitoring from the start and to display it on company dashboards. If an application is very extensive, it often makes sense to not only write an overall SLA but also for certain sub-areas. This often has a positive effect on the availability calculation.
+It is important to plan SLA monitoring from the start and to display it on the company dashboards. If an application is very extensive, it often makes sense not only to write an overall SLA but also for certain sub-areas. This often has a positive effect on the availability calculation.
 
 #### Roles, Responsibility & Collaboration
 
-In addition to the technical influences, human conditions and team structures should be also taken into account when planning the cloud infrastructure.
+In addition to the technical influences, human conditions and team structures should be also considered when planning the cloud infrastructure.
 
-You should ask yourself what kind of team-knowledge is available in order to have a good mix of existing experience and space to try out new technologies.
+You should ask yourself what kind of team-knowledge is available, in order to have a good mix of existing experience and space to try out new technologies.
 
 The structures outside of the development team also have an impact on what you build. Note the following:
 
 * Are there system parts that other teams provide and should be used? If so, what are the interfaces and how do you get the communication as narrow as necessary.
 
-* Are there system parts that other teams provide which are should not be used,  so instead you should rebuild the functionality by your team, mabe because of different development speeds between both teams or the expected amount of changes over time.
+* •	Are there system parts that other teams provide which should not be used, and therefore must be created by your team, this may be because of different development speeds between the teams or the expected number of changes over time.
 
-* Are there general selection or configuration conditions for services based on cross-sectional platform requirements or something similar?
+* Are there general conditions for the selection and configuration of the services based on cross-sectional platform requirements or something similar?
 
 More considerations on this can be found in this blog (in german): https://www.maibornwolff.de/blog/plattformen-als-motor-cross-funktionaler-teams
 
