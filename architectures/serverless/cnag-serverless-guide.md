@@ -100,7 +100,7 @@ Jede Applikation referenziert das Domainpackage jetzt nicht über irgendeinen Ar
 
 Oft wird Serverless fälschlicherweise mit der Notwendigkeit verbunden, nur noch sehr kleinteilige Applikationen zu bauen, und die gesamte Anwendung auf sehr viele isolierte Einheiten (Functions) zu verteilen. Aber nicht immer macht das für die entsprechende Domäne Sinn.
 
-Mit dem Ansatz die Domäne unhabhängig von den Functions zu entwickeln, ist es möglich die Gesamtapplikation auch bei Serverless Functions zu designen. 
+Mit dem Ansatz die Domäne unhabhängig von den Functions zu entwickeln, ist es möglich die Gesamtapplikation auch bei Serverless Functions zu fachlich zu designen. 
 Trotzdem schließt das bei den meisten Serverless functions Frameworks keinen technischen Schnitt aus. Functions lassen in den gleichen Runtimes zusammenfassen oder gruppieren. So können zum Beispiel, alle Http Trigger für eine virtuelle Komponente in einer Runtime instanz bereitgestellt werden (siehe Bild). 
 Alle Functions die zusammen gruppiert in einer Runtime laufen skalieren technisch jetzt wieder gemeisam. Das kann abhängig von gewählten Hosting umgebung vorteile beim Computebedarf, und somit kosten, oder auch latenzen haben. Theroretisch könnte man alle serverless functions einer virtuellen component zusammen über eine Runtime laufen lassen und z.B. Asynchrone Nachrichten Trigger zusammen mit HTTP Triggern. Dann hätte man wieder einen Microservice, nur mit Serverless Function gebaut. Oft macht deshalb einfach eine gruppierung der HTTP Functions sinn.
 
