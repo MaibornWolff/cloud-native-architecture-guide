@@ -2,37 +2,36 @@
 {: .no_toc}
 * TOC
 {:toc}    
+## "Serverless" What does it mean?
+As it starts with serverless computing, it used to be associated with AWS lambdas or Azure Functions.
 
+With serverless computing, everything focused on architectural ideas for building applications based on many small functions, especially in the beginning. Either on cloud provider native environments like Lambdas, frameworks like Knative, or the "serverless framework." (links)
 
-## What is the term "Serverless" about?
-Früher hat man damit immer AWS lambdas oder Azure Functions mit in Verbindung gebracht.
+That's right, but serverless is now more, and the use of the term has shifted a bit. As an example, AWS categorized the S3 storage under serverless. Azure names high-level operation tiers for many services as "serverless" since it is often an abstraction with minimum contact with operations.
 
-Bei serverless drehte sich vor allem am Anfang alles um Architekturideen wie man Applikationen auf Basis einer vielzahl von kleinteiligen functions aufbauen kann. Entweder auf cloud provider nativen Umgebungen wie Lambda oder Frameworks wie Knative oder dem "serverless framework". (Links)
+Serverless means keeping the operating costs for cloud-native apps to a minimum without the need to manage individual hosts, VMs, or nodes. The development focuses on content and not operation. 
+A consumption-based database service where it is invisible how many distributed host instances run the service is just as serverless as a Kubernetes cluster used as a control plane, where individual nodes no longer play a role.
+Consumption-based in this context means you are billed just for actual on-demand usage instead of operating hours.
 
-Das ist nicht falsch, allerdings ist Serverless inzwischen mehr und der gebrauch des Begriffs hat sich etwas verschoben. AWS hat als Beispiel auch den S3 Storage unter serverless laufen. Azure bezeichnet bei vielen services die einfache betriebsmodelle als "serverless" betriebsmodell, da es oft eine hohe abstraktstionsebene ist mit dem gerinsten kontakt zu operations.
+Cloud-native applications make as much use as possible of serverless-based cloud services to focus on developing technical use cases instead of spending a lot of time configuring the suitable scaling for the operation of infrastructure. In modern application development, an application usually starts with a PoC, becoming an MVP. Later, with growing demands and users, the workload in the system increases. With consumption-based billing, the costs will scale with the size of the application. Serverless charges start very low on small workloads. Often, the first million calls are free. An upfront investment in computing or storage is not necessary. 
+The difference becomes even more tangible when the sys
 
-Serverless bedeutet die betriebsaufwände für cloudnative apps auf ein minimum zu beschränken ohne die notwendigkeit zur verwaltung von einzelnen Hosts vms oder nodes. Die Entwicklung fokussiert auf inhalte und nicht betrieb. Ein Datenbankservice, wo es keine Rolle spielt auf wieviel verteilten host instanzen der Dienst läuft und nur noch nach Consumptions abgrechnet anstatt von Betriebsstunden ist genauso serverless wie ein Kubernetes Cluster, dass nur noch als Controllplane genutzt werden kann und einzelne nodes keine Rolle mehr spielen.
+## What are serverless functions?
+Serverless meets functions - a perfect match.
 
-Cloud native Applikationen machen soviel Gebrauch wie nur möglich von serverless basierten Cloud Services um den Fokus auf die Entwicklung von fachlichen Use Cases zu legen anstatt in die Betriebnahme von infrastruktur viel Zeit in Konfufuration der richtigen Sklalierung. Eine Application startet in der Regel in der modernen Anwendungsentwicklung mit einem PoC aus dem dann ein MVP wird. Später mit wachsenden Bedarf von Anforderungen und User steigt der workload in dem System. Durch Consumption basierte Abrechnung sklalieren auch die Kosten mit der Größe der Anwendung. Serverless Services kosten in der Regel bei geringen Workload sehr wenig. Häufig sind sogar die ersten Milliionen Aufrufe kostenlos. Ein Upfront invest in Computing- oder Storage-Instanzen ist nicht notwendig. Noch krasser wird der unterschied, wenn das System mit wenig Last, aber über georegionen verteilt starten muss. Der Upfront invest in Instanzen wäre in diesen deutlich höher, wenn keine Nachteile durch Latenzen entstehen soll.
+Serverless functions are cloud services that enable developers to write and deploy code like a classic function of any high-level language without implementing host-relevant tasks, such as controlling an application lifecycle or listings on ports.
 
-Ergänzend muss aber bedacht werden, dass es Situationen gibt, wo workload auf gekauften instanzen günstiger sein kann. Oft bei hoher gleichbleibener Last übersteigen irgendwann die Serverless Kosten die Kosten für Instanzen. Allerdings muss hier auch der erhöhte Betriebsaufwand kalkuliert werden.
+Since functions no longer concern themselves with the lifecycle management of a specific host, they are event-driven by design. There needs to be a trigger to execute the computing function. The event that triggers the call can be, for example, a message on a message bus, a call to an HTTP endpoint, a new data record in storage, or a time-controlled event. For many different trigger types, it's a one-liner to bind a function to an event.
 
-## Was sind Servless Functions?
-Serverless meets Functions - a perfect match
-
-Als Serverless Functions bezeichnet man Services in der Cloud, die es Entwicklern ermöglicht in der Art und weise einer klassischen function einer beliebigen Hochsprache Code zu schreiben und zu deployen ohne dabei hostrelevante Aufgaben zu implementieren, wie zum Beispiel das Steuern eines Anwendungs-Lifecycles oder das listeings on ports.
-
-Da man bei functions sich nicht mehr um das lifecycle management eines spezifischen Host kümmert, sind functions per design event getrieben. Es gibt immer irgendeine Art von Trigger um die function auszuführen. Das Event, das den Aufruf triggert, kann zum Beispiel eine Nachricht auf einem Message bus, ein Aufruf eines HTTP Endpunktes, ein neuer Datensatz in einem Storage oder auch ein Zeitlich gesteuertes Ereignis sein. Für viele verschiedene Triggertypen, ist es ein Einzeiler sich auf ein das Ergeignis als Empfänger zu binden.
-
-Da die Natur einer Function in der Informatik aus input -> verarbeitung -> output besteht, ist es in diesem Kontext nicht nur möglich den Input an ein Event zu binden, sondern auch den Output direkt mit einer geeigneten Ausgaberesource wie zum Beispiel eine Datenbanktabelle oder eine Messagequeue.
+From a computer science perspective, a function natively consists of input -> processing -> output. It is possible to bind the "input" to a business event and to connect the result directly to a suitable output resource, such as a database table or a message queue.
 
 ![](./images/input_output.png)
 
-Damit sind Functions sind ein perfekter match für Serverless, da keinerlei aufwände im Code entstehen um einen Host zu steuern und durch die einfachen input und output bindings auch kaum Querschnittscode. Es reduziert sich der Entwicklungsaufwand fast ausschließlich auf Fachlichkeit und nicht darauf wo diese läuft.
+Functions are a perfect match to serverless since there is no effort in code to control a host, and because of the simple input and output bindings, there is nearly no cross-cutting code. This fact reduces the development effort almost exclusively to the business domain code.
 
-Natürlich läuft der code "irgendwo". Wie in dem Bild zu sehen ist, wird der Aufgerufene Code von einer Art Runtime umgeben, die sich nicht nur um lifecycle kümmert, sondern oft auch functionalität für logging, tracing oder Authentifzierung oder Transportverschlüsselung.
+Of course, the code runs "somewhere." As seen in the picture, the called code runs on a runtime, which takes care of the lifecycle and often includes functionality for logging, tracing or authentication, or transport encryption.
 
-Es gibt verschiedene Möglichkeiten wo eine Function Runtime laufen kann.In Hinlick auf Serverless, macht es Sinn eine Umgebung auszuwählen die Betriebsaufwände für die Runtime selbst weitesgehend reduziert.
+There are various ways to host such kind of runtimes. Regarding serverless, select an environment that reduces hosting costs and has the right tradeoff between features and operability.
 
 ## Hosting Modelle für Serverless Functions
 
@@ -45,66 +44,71 @@ Beispiele für betriebsmodelle Für die Runtime.
 - Google cloudrun
 - ...
 
-## Wie designed man Software mit Serverless Functions
+## How to design software with Serverless Functions
 
-### Fachliche domain in klassischen Microservices
-Im Softwaredesign ist es in den allermeisten Fällen ein guter Ansatz sich an der fachlichen Domäne zu orientieren. bei einen Monolithen bestimmt die Struktur der Domäne den fachlichen Komponentenschnitt bei Microservices den Serviceschnitt. Ziel ist es, dass Services bzw. Komponenten fachlich so strukturiert sind, dass diese technisch möglich unabhängig agieren können. Bekannt als "High cohesion and low coupling". 
-Auf dem folgenden  Bild ist ein klassischer Microservice approach abgebildet. Jeder Service ist für einen bestimmten abgrenzbaren Teil der Domäne zuständig und möglichst unabhängig von anderen Services. Jeder Service hat einen separierten Daten Layer und bietet je nach Bedarf verschiedene Kommunikationsschnittstellen an, wie z.B. REST API Endpunkte oder das senden und empfangen asynchroner Nachrichten. 
-Hier abgebildet ist ein Hexagonaler Architekturansatz, der die Domäne in den Mittelpunkt der Entwicklung von Microservices stellt. direkt um die Domain legt sich die Applikationsschicht, die keinerlei eigene Logik enthällt sondern ein Wrapper zum starten der Domain ist. Auf der äußersten Schicht befindet sich der Adapter layer, der die Domain mit konkreten externen ressourcen, wie zum Beispiel Datenbanken, Messagebroker oder anderen Microservices über Clients verbindet. Auch bereitgestellte API's werden über den Adapterlayer abgebildet. (Links zu div. Maibornwolff Blogs über DDD - Silas z.B.)
+### Technical domain in classic microservices
+In software design, orienting yourself on business domain aspects is a good approach. Within a monolith, the structure of the domain influence the business component design, In the case of microservices, the service separation. The aim for services and components is to structure the domain so that they can act technically independently, known as "High cohesion and low coupling."
+The following image shows a classic microservice approach. Each service is responsible for a specific, definable part of the domain and is as independent as possible from other services. Each service has a separate data layer and offers different communication interfaces depending on your needs, such as REST API endpoints or sending and receiving asynchronous messages.
+The example shows a hexagonal architecture approach that puts the domain at the center of microservices development. The application layer, which does not contain any logic but contains the entry point for the domain, is placed directly around. The outer layer represents the adapter layer, which connects the domain to specific external resources such as databases, message brokers, or other microservices via clients. Provided APIs are also part of the adapter layer. (Links to various Maibornwolff blogs about DDD - Silas, e.g.)
 
 ![](./images/microservices.png)
 
-Pattern wie Domain Driven Design lassen sich besonders dann optimal anwenden, wenn der Serviceschnitt fachlich orentiert ist. Bei einem guten design verteilt sich die Weiterentwicklung auch bei Microservices nicht über mehrere Anwendungsteile. 
-Technisch gesehen, ist der Schnitt allerdings eher suboptimal. Da die Skalierung gleichzeitig für mehrere Eingangs- und auch Ausgangskanäle passiert. Die richtige Anzahl gewählter Instanzen pro Microervice kann nicht spezifisch für eine Ressource gewählt werden, da jede Skalierungsconfiguration immer den gesamten Service betrifft.
+Patterns such as Domain Driven Design can be optimally applied when you align the service design and separation with the business cases. In a good service design, developers should change as few microservices as possible for business adjustments.
+From a technical point of view, however, these design patterns could be suboptimal since the scaling happens simultaneously for several input-and output channels. The runtime environment cannot choose the minimal or maximal requirement number of instances per microservice channel since each scaling configuration affects the entire service.
 
-### Use a more fine grained approach
-Eine klassische Abbildung eines Microservies auf Serverless functions sieht oft so wie auf der nächsten Abbildung aus. Es gibt für jede Eingangsressource eine eigene Serverless Function und damit eine eigene Applikation. In diesem Beispiel eine Function, die auf eingehende Nachrichten auf einer Queue hört und eine andere Function die bei einer bestimmten HTTP Methode getriggert wird.
+### Use a more fine-grained approach
+A classic mapping of a microservice to serverless functions often looks like the following figure. Each input resource has its serverless function and, thus, its application and runtime project. In the example below, a Serverless Function listens for incoming queue messages, and another Serverless Function uses a trigger for a specific HTTP method.
 
 ![](./images/technical.png)
 
-Damit löst sich das Problem, der technischen Skalierung. Für jede Serverless Function, kann jetzt die Skalierung abhängig des jeweiligen eingangstriggers optimiert werden. Dafür sorgt im Standardfall die Hostumgebung der Functions. 
+Divide the message handler from the HTTP API solves the problem of technical-driven scaling. Depending on the respective input trigger, the host environment could optimize scaling for each serverless function.
 
-Allerdings ist es jetzt ein technischer Schnitt und kein Fachlicher mehr. Es gibt jetzt 2 Domain kerne. Lösen diese, die gleiche Aufgabe, wie vorher ein einzelner Microservice, gibt es jetzt einen Splitt in der Domain. Das hat zur Folge, dass automatisch Abhängigkeiten zwischen den beiden functions entstehen. Die Nutzung der selben Datenbank und damit auch sehr ähnlichen Datenmodellen, führt zu deutlich mehr Code duplizierungen als vorher. Zwar ist es natülich möglich, Datenmodelle über gesonderte shared libs mit eigener Versionierung zu extrahieren. Das ist bei Microservices nicht ohne Grund ein Antipattern. Es erzeugt wieder Komplexität und Abhängigkeiten. 
+However, it is now a technical-driven separation and no longer a business domain decision. There are now two domain cores. Assume that both functions solve the same business use case like the classical microservice above; Now, the domain is split into two cores. As a result, dependencies between the two functions automatically arise. Using the same database and very similar data models leads to significantly more code duplication than before. It is possible to extract data models via separate shared libs with versioning. But this is an antipattern for microservices for a reason. It creates complexity and dependencies again.
 
 ### Virtual Components
-Patterns, die sich bei Microservices etabliert haben, wie z.B. dass jeder Service nur seine Datenbank im Zugriff haben darf, kann beim Einsatz von Serverless Functions rein technisch sinnvollerweise nicht durchgesetzt werden.
+Patterns that have become established with microservices, as each service may only have access to its database, cannot be enforced when using serverless functions, which makes sense from a purely technical point of view.
 
-Es stellt sich die Frage, ist denn eine einzelne Serverless Function überhaupt ein in sich geschlosserener Fachlicher Kontext wie einem fachlichen domain schnitt? Nein - eine Serverless Function erfüllt meistens nur einen kleinen technischen Aspekt eines größeren fachlichen Services. Das heißt aber auch, dass die Summe aller technischen Eventtrigger, die vorher in einem Microservice vereinigt waren, zusammen schon eine Domain bilden. Nur eben virtuell. Das ist auf jeden Fall eine wichtige Erkenntnis. Wenn man sich eine große Anwendung mit unterschiedlichen Domains vorstellt, die nun durch eine vielzahl Serverless Functions abgebildet wird und jede Functions auf beliebige Ressourcen und Datenschichten zugreift, nur weil Functions technisch motiviert designed werden, ensteht ein über die Zeit eine unwartbare Gesamtanwendung. 
+Is a single serverless function a self-contained technical context such as a technical domain section? No - a serverless function usually only fulfills a small technical aspect of a larger domain-driven service. But that means the sum of all technical event triggers, which are classically combined as a microservice, forms a domain. But Just virtual, which is an important finding. 
+Imagine a large application consisting of many Serverless Functions with different domains. And each function accesses any resources and data layers just because you design functions from a technical perspective. In that case, an unmaintainable overall application arises over time.
 
-Auch bei Anwendungen mit serverless Functions ist es möglich seine Anwendung nach Fachlichen Komponenten zu designen, indem Virtuelle Komponenten um Fachliche Domänen bildet wie auf der nächsten Abbildung zu sehen.
+Even with applications based on Serverless Functions, it is possible to design your application according to business components. 
+Here come virtual components into play. Form these virtual components around business domains, as shown in the following figure.
 
 ![](./images/virtual_component.png)
 
-Im ersten Schritt können Regeln und Kontrakte für die Kommunikation zwischen den fachlichen Komponenten festgelegt werden. Zum Beispiel kann festgelegt werden, Functions sollten nur innerhalb einer komponente mit einem gemeinsamen Datenlayer interagieren dürfen und für Component zu Component nur asnychron über einen Messagebus. Anders gesagt, damit können viele Patterns, die sich beim Design mit Microservices etabliert haben wiederverwendet werden, nur dass sich technische Verarbeitung einzelner Aspekte auf verschiedene Runtimes aufgeteilt haben (Siehe folgende Abbildung).
+If the domain boundary is clear, you can define rules and contracts for communication between different virtual components. For example, it can be specified that functions should only be allowed to interact within a component with a data layer and for component to component only asynchronously via a message bus. In other words, many patterns established in microservice design can be reused, except that the technical processing of individual aspects has been divided between different runtimes (see figure below).
 
 ![](./images/multi_component.png)
 
-### Extract an domain core for every virtual component
-Auch wenn die Aufteilung auf virtuelle fachliche Componenten ein guter erster Schritt ist, bleibt das Problem des verteilten Domänenkerns.
-Auch dafür hat ein Solutionpattern entwickelt. Es ist natürlich möglich sowas wie ein Hexagonales Pattern in jeder Serverless Function kleinteilig abzubilden. Aber im Kern ist eine Serverless Function nicht anderes als ein spezifischer Einstiegspunkt in eine Applikation. Statt also jede Function als einen kleineren ganzheitlichen teil einer Applikation zu sehen, kann auch der Domain Kern vom Trigger, für den die einzelne Function zuständig ist, einfach trennen. Fachlich gesehen, designed man so wieder einen Fachlichen Domänenkern wie einem klassischen Microservice, löst aber die Applikationsschicht in eine eigene Anwendungsinstanz heraus. 
+### Extract a domain core for every virtual component
+Even if the separation into virtual business components is an excellent first step, the problem of the distributed domain core remains.
+Implementing a hexagonal pattern in every serverless function in small parts is possible. But a Serverless Function is often nothing more than a specific entry point into an application. 
+So instead of seeing each function as a tiny, holistic part of an application, you can separate the domain core from the specific responsible trigger. From a technical point of view, you design a business domain core like a classic microservice but separate the application layer into an independent application instance.
 
 ![](./images/external_domain_core.png)
 
-Wie hier auf der Abbildung zu sehen ist, ist der Domainkern wieder vereint. Technisch wird je nach gewählter Sprache ein Package ohne Applikationsschicht gebaut. Auch der Adapterlayer bleibt um die Domäne gespannt und wird teil von diesem Package. So bleiben Zugriffe auf Datenbanken oder externen Ressourcen rein logisch an einer Stelle.
-Die Serverless Functions wiederum referenzieren dieses Domainenpackage lediglich und sind technisch weiterhin auf 2 (oder mehr)Anwendungsruntimes aufgeteilt.  
+As can be seen in the picture here, the domain core is reunited. The domain core is just a built package without an application layer. The adapter layer remains stretched around the domain and becomes part of this package. This way, access to databases or external resources remains in one place.
+The serverless functions, in turn, only reference this domain package and are technically still divided into 2 (or more) application runtimes.
 
-Natürlich ist es möglich das domänen package als einzelnes Artefakt zu verstehen mit eigeigener pipeline und package versionierung. Allerdings ist das ein schon bei Microservices ein Antipattern gewesen, da shared libs oder models zwischen verschiedenen Services durch die unterschiedlichen Lifecycles unnötige Abhängigkeiten und die Komplextität erhöht haben. 
-Hier geht es zwar nicht darum Abhängigikeiten zu reduzieren, da anders als Microservices alles Scope einer virtuellen Komponente ist, die Komplexität steigt aber trotzdem durch die unabhängige Versionierung.
+Of course, it is possible to understand the domain package as a single artifact with its pipeline and package versioning. However, this has already been an anti-pattern for microservices since shared libs or models between different services have increased unnecessary dependencies and complexity due to the different lifecycles.
+The point is not to reduce dependencies since everything is in the scope of a virtual component. The complexity nevertheless increases due to the independent versioning.
 
-Eine Alternative, die sich bei Serverless Functions bewährt hat, ist die folgende Projektstruktur (Siehe Bild). pro  virtuelle Business component gibt es eine Ordner top Level struktur. Darunter gibt es dann jeweils einen Ordner oder ein losgelöstes entkoppeltes Package für die Domäne und einen Ordner für jede Serverless Function Applikation. 
-Jede Applikation referenziert das Domainpackage jetzt nicht über irgendeinen Artefaktstore, sondern direkt über die Ordnerstruktur zu buildzeit. Es gibt dann eine Pipeline pro virtuell Component, war bedeutet, dass jeder Change on der Komponente, egal ob an der Domain oder den Serverless Functions einen Build triggert. Die Anzahl der Artefakte, ist dann abhängig von der Anzahl der Functions.
+An alternative that has proven itself with serverless functions is the following project structure. See the image below. 
+There is a top-level folder structure for each virtual business component. Below is a folder or a detached decoupled package for the domain and a folder for each serverless function application.
+Each application now references the domain package, not via any artifact store but via the folder structure at build time. Additionally, there is a pipeline per virtual component, meaning every change on the component, whether on the domain or the serverless functions, triggers a build. The number of artifacts then depends on the number of functions.
+
 
 ![](./images/folder_structure.png)
 
-### Finegrained vs coarse grained Application design
+### Fine-grained vs. coarse-grained application design
+Serverless is often wrongly associated with building only minimal applications and distributing the entire application to many isolated units (Serverless Functions). But that only sometimes makes sense for the corresponding domain.
 
-Oft wird Serverless fälschlicherweise mit der Notwendigkeit verbunden, nur noch sehr kleinteilige Applikationen zu bauen, und die gesamte Anwendung auf sehr viele isolierte Einheiten (Functions) zu verteilen. Aber nicht immer macht das für die entsprechende Domäne Sinn.
-
-Mit dem Ansatz die Domäne unhabhängig von den Functions zu entwickeln, ist es möglich die Gesamtapplikation auch bei Serverless Functions zu fachlich zu designen. 
-Trotzdem schließt das bei den meisten Serverless functions Frameworks keinen technischen Schnitt aus. Functions lassen in den gleichen Runtimes zusammenfassen oder gruppieren. So können zum Beispiel, alle Http Trigger für eine virtuelle Komponente in einer Runtime instanz bereitgestellt werden (siehe Bild). 
-Alle Functions die zusammen gruppiert in einer Runtime laufen skalieren technisch jetzt wieder gemeisam. Das kann abhängig von gewählten Hosting umgebung vorteile beim Computebedarf, und somit kosten, oder auch latenzen haben. Theroretisch könnte man alle serverless functions einer virtuellen component zusammen über eine Runtime laufen lassen und z.B. Asynchrone Nachrichten Trigger zusammen mit HTTP Triggern. Dann hätte man wieder einen Microservice, nur mit Serverless Function gebaut. Oft macht deshalb einfach eine gruppierung der HTTP Functions sinn.
+Developing the domain independently of the functions makes it possible to design the entire application from a business perspective, including the option to design for technical separations and independent resource usage.
+Functions can be combined or grouped within the same runtimes. For example, you can combine all HTTP triggers for a virtual component in one runtime instance. See the image below.
+All functions grouped in one runtime now technically scale together depending on the selected hosting environment, which can also affect costs or latencies. Theoretically, you could run all serverless functions of a virtual component together via a runtime, e.g., asynchronous message triggers and HTTP triggers. Then you would have built a microservice again, only with serverless functions. Therefore, it often makes sense only to group the HTTP functions.
 
 ![](./images/share_runtime.png)
 
 ## Serverless Container
+TBD
 
