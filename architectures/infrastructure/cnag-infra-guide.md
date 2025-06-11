@@ -514,3 +514,4 @@ Nevertheless, it can make sense to rely on these tools if the entire landscape i
 [Hub-Spoke-Netzwerktopologie in Azure - Azure Reference Architectures | Microsoft Docs](https://docs.microsoft.com/de-de/azure/architecture/reference-architectures/hybrid-networking/hub-spoke?tabs=cli)  
 [GitHub - Azure/bicep: Bicep is a declarative language for describing and deploying Azure resources](https://github.com/Azure/bicep)  
 [https://www.terraform.io/](https://www.terraform.io/)
+[Terraform vs. Ansible : Key Differences and Comparison of Tools](https://spacelift.io/blog/ansible-vs-terraform)
